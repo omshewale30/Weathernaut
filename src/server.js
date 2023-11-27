@@ -4,7 +4,7 @@ const routes = require('./users/routes');
 const app = express();
 const port = 3000;
 
-app.use(express.json());     // to support JSON-encoded bodies
+app.use(express.json());
 
 app.get('/', (req, res) => {
     res.send('Hello World!');

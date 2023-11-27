@@ -23,29 +23,65 @@ const getUserById = async (req, res) => { // this is a route handler
 }
 
 const createUser = async (req, res) => {
-    const {username, email, password} = req.body;
+    const {username, email, password} = req.body[0];
+    console.log("Username: " + username+ "email: " + email + "Password: " + password);
 
-    pool.query(queries.checkifEmailExists, [email], (error, results) => {
-        if (error) {
-            throw error;
+    pool.query(queries.checkIfEmailExists, [email], (error, results) => {
+        if (results.rows.length) {
+            res.send('Email already exists');
         }
-        if (results.rows.length > 0) {
-            res.status(409).send('Email already exists');
+        pool.query(queries.createUser, [username, email, password], (error, results) => {
+            if (error) {
+                throw error;
+            }
+            res.status(201).send(`User added`);
         }
-        else {
-            pool.query(queries.createUser, [username, email, password], (error, results) => {
-                if (error) {
-                    throw error;
-                }
-                res.status(201).send(`User added with ID: ${results.insertId}`);
-            });
-        }
+        );
+
     });
+};
+
+const deleteUser = async (req, res) => {
+    const userid = parseInt(req.params.userid);
+
+    pool.query(queries.getUserById, [userid], (error, results) => {
+        if (!results.rows.length) {
+            res.send('User does not exist');
+        }
+
+        pool.query(queries.deleteUser, [userid], (error, results) => {
+            if (error) {
+                throw error;
+            }
+            res.status(200).send(`User deleted with ID: ${userid}`);
+        });
+    });
+}
+
+const updateUser = async (req, res) => {
+    const userid = parseInt(req.params.userid);
+    const {username, email, password} = req.body[0];
+
+    pool.query(queries.getUserById, [userid], (error, results) => {
+        if (!results.rows.length) {
+            res.send('User does not exist');
+        }
+
+        pool.query(queries.updateUser, [username, email, password, userid], (error, results) => {
+            if (error) {
+                throw error;
+            }
+            res.status(200).send(`User modified with ID: ${userid}`);
+        });
+    });
+
 }
 
 
 module.exports = {
     getUsers,
     getUserById,
-    createUser
+    createUser,
+    deleteUser,
+    updateUser
 };
