@@ -1,44 +1,58 @@
-// WeatherView.jsx
 import React, { useState, useEffect } from 'react';
 
-const WeatherView = ({ selectedLocation }) => {
-    const [weatherDetails, setWeatherDetails] = useState(null);
+const WeatherView = ({ locationId }) => {
+    const [weatherData, setWeatherData] = useState(null);
 
     useEffect(() => {
-        // Fetch weather details based on the selectedLocation
-        // Replace the following with your actual API call to fetch weather details
+        const fetchWeatherData = async () => {
+            try {
+                // Assuming you have an API endpoint to fetch weather data based on locationId
+                console.log("making an api call with " +locationId);
+                console.log("http://localhost:3001/api/v1/weatherData/location/"+ locationId);
+                const response = await fetch('http://localhost:3001/api/v1/weatherData/location/'+ locationId);
 
-        // For demonstration purposes, using dummy data
-        const dummyWeatherDetails = {
-            pressure: 1015,
-            precipitation: 0.5,
-            date: '2023-11-24',
-            temperature: 20,
-            humidity: 60,
-            windspeed: 10,
-            weather_condition: 'Clear',
+                if (!response.ok) {
+                    throw new Error('Failed to fetch weather data');
+                }
+
+                const data = await response.json();
+                console.log(data);
+                setWeatherData(data);
+            } catch (error) {
+                console.error('Error fetching weather data:', error);
+            }
         };
 
-        setWeatherDetails(dummyWeatherDetails);
-    }, [selectedLocation]);
+        if (locationId) {
+
+            fetchWeatherData();
+        }
+    }, [locationId]);
 
     return (
         <div>
-            <h2>Weather Details</h2>
-            {weatherDetails ? (
+            <h2>Weather Information</h2>
+            {weatherData ? (
                 <div>
-                    <p>Pressure: {weatherDetails.pressure} hPa</p>
-                    <p>Precipitation: {weatherDetails.precipitation} mm</p>
-                    <p>Date: {weatherDetails.date}</p>
-                    <p>Temperature: {weatherDetails.temperature} °C</p>
-                    <p>Humidity: {weatherDetails.humidity}%</p>
-                    <p>Wind Speed: {weatherDetails.windspeed} km/h</p>
-                    <p>Weather Condition: {weatherDetails.weather_condition}</p>
+                    {weatherData.map((data, index) => (
+                        <div key={index}>
+                            <p>Pressure: {data.pressure}</p>
+                            <p>Precipitation: {data.precipitation}</p>
+                            <p>Data ID: {data.dataid}</p>
+                            <p>Date: {data.date}</p>
+                            <p>Temperature: {data.temperature}</p>
+                            <p>Humidity: {data.humidity}</p>
+                            <p>Wind Speed: {data.windspeed}</p>
+                            <p>Weather Condition: {data.weather_condition}</p>
+                            <hr />
+                        </div>
+                    ))}
                 </div>
             ) : (
-                <p>Loading weather details...</p>
+                <p>Loading weather data...</p>
             )}
         </div>
+
     );
 };
 

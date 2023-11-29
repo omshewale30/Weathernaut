@@ -1,9 +1,12 @@
 import React, {useState, useEffect} from "react";
+import Button from "bootstrap/js/src/button";
+import WeatherView from "./WeatherView";
 
 
 const Homescreen = () => {
     const [locations, setLocations] = useState([]);
     const [selectedLocation, setSelectedLocation] = useState(null);
+    const [showWeather, setShowWeather] = useState(false);
 
 
     useEffect(() => {
@@ -23,9 +26,16 @@ const Homescreen = () => {
         fetchLocations();
     }, []);
     const handleLocationChange = (event) => {
-        const selectedLocationId = event.target.value;
-        const location = locations.find((loc) => loc.id === selectedLocationId);
+        const selectedLocationId = parseInt(event.target.value);
+        console.log(selectedLocationId);
+        const location = locations.find((loc) => loc.locationid === selectedLocationId);
         setSelectedLocation(location);
+        console.log(location);
+    };
+
+    const handleShowWeatherClick= () =>{
+        setShowWeather(true)
+
     };
 
     return (
@@ -36,19 +46,25 @@ const Homescreen = () => {
                 <select onChange={handleLocationChange}>
                     <option value="">Select a location</option>
                     {locations.map((location) => (
-                        <option key={location.id} value={location.id}>
+                        <option key={location.locationid} value={location.locationid}>
                             {`${location.city}, ${location.country}`}
                         </option>
                     ))}
                 </select>
             </label>
+            <button onClick={handleShowWeatherClick} disabled={!selectedLocation}>
+                Show Weather
+            </button>
 
             {selectedLocation && (
                 <div>
                     <p>Selected Location: {`${selectedLocation.city}, ${selectedLocation.country}`}</p>
-                    {/* Render other components or details based on the selected location */}
                 </div>
             )}
+            {showWeather && (
+                <WeatherView locationId={selectedLocation.locationid} />
+            )}
+
         </div>
     );
 };

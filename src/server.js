@@ -1,8 +1,12 @@
 const express = require('express');
 const cors = require('cors');
+
 const app = express();
 const port = 3001;
 app.use(cors());
+
+
+
 const routes = require('./users/routes');
 const location_routes = require('./location/locationRoutes');
 const weatherData_routes = require('./weatherData/weatherDataRoutes');
