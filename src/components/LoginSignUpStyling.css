@@ -1,0 +1,21 @@
+body, html {
+    height: 100%;
+    margin: 0;
+  }
+  
+  .form-group {
+    max-width: 400px; /* Adjust the max-width as needed */
+  }
+
+  .icon {
+    filter: brightness(0);
+  }
+
+  .login-container {
+    height: 100vh;
+    background-size: cover;
+    background-image: url('./Assets/weather.gif');
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
