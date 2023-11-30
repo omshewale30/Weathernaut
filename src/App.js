@@ -9,9 +9,8 @@ import ProfileIcon from "./components/ProfileIcon";
 import ProfilePage from "./components/ProfilePage";
 
 const App = () => {
+
     const isLoggedin= JSON.parse(localStorage.getItem("isLoggedIn"));
-
-
     return (
         <Router>
             <div>

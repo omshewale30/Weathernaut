@@ -38,6 +38,7 @@ const Login = () => {
 
 
             window.localStorage.setItem("username", formData.username);
+            window.localStorage.setItem("password", formData.password);
             navigate('/HomeScreen');
             console.log("User logged in");
         }

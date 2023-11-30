@@ -43,6 +43,7 @@ const SignUp = () => {
             else {
                 window.localStorage.setItem("isLoggedIn", true);
                 window.localStorage.setItem("username", formData.username);
+                window.localStorage.setItem("password", formData.password);
                 navigate('/HomeScreen');
                 console.log("User logged in");
             }
