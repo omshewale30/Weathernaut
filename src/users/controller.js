@@ -27,6 +27,9 @@ const checkIfUserExists = async (req, res) => {
         const { username, password } = req.params;
 
         console.log("Username:", username);
+        if (!username || !password) {
+            return res.status(400).json({ error: 'Please fill all fields' });
+        }
 
         const queryResult = await pool.query(queries.checkIfUserExists, [username, password]);
 
@@ -41,28 +44,54 @@ const checkIfUserExists = async (req, res) => {
     }
 };
 
-
-
 const createUser = async (req, res) => {
-    console.log(req.body);
-    const {username, email, password} = req.body;
+    try {
+        console.log(req.body);
+        const { username, email, password } = req.body;
 
-    console.log("Username: " + username+ "email: " + email + "Password: " + password);
+        console.log("Username: " + username + "email: " + email + "Password: " + password);
 
-    pool.query(queries.checkIfEmailExists, [email], (error, results) => {
-        if (results.rows.length) {
-            res.send('Email already exists');
+        // Check if any of the fields are empty
+        if (!username || !email || !password) {
+            return res.status(400).json({ error: 'Please fill all fields' });
         }
-        pool.query(queries.createUser, [username, email, password], (error, results) => {
-            if (error) {
-                throw error;
-            }
-            res.status(201).send(`User added`);
-        }
-        );
 
-    });
+        const emailExistsResult = await pool.query(queries.checkIfEmailExists, [email]);
+
+        if (emailExistsResult.rows.length > 0) {
+            return res.status(400).json({ error: 'Email already exists' });
+        }
+
+        const createUserResult = await pool.query(queries.createUser, [username, email, password]);
+
+        res.status(201).json({ message: 'User added' });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 };
+
+
+// const createUser = async (req, res) => {
+//     console.log(req.body);
+//     const {username, email, password} = req.body;
+//
+//     console.log("Username: " + username+ "email: " + email + "Password: " + password);
+//
+//     pool.query(queries.checkIfEmailExists, [email], (error, results) => {
+//         if (results.rows.length) {
+//             res.send('Email already exists');
+//         }
+//         pool.query(queries.createUser, [username, email, password], (error, results) => {
+//             if (error) {
+//                 throw error;
+//             }
+//             res.status(201).send(`User added`);
+//         }
+//         );
+//
+//     });
+// };
 
 const deleteUser = async (req, res) => {
     const userid = parseInt(req.params.userid);

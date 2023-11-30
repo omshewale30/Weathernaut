@@ -23,15 +23,23 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!formData.username || !formData.password) {
+            setErrorMessage('Please enter username and password');
+            return;
+        }
 
         const response = await fetch("http://localhost:3001/api/v1/users/checkIfUserExists/" + formData.username + "/" + formData.password);
 
-        if (response.ok) {
-            window.localStorage.setItem("isLoggedIn", true);
+        if (response.status === 400) {
+            const data= await response.json();
+            setErrorMessage(data.error)
+        } else if (response.ok) {
+            window.localStorage.setItem("isLoggedIn", JSON.stringify(true));
+
+
             window.localStorage.setItem("username", formData.username);
             navigate('/HomeScreen');
             console.log("User logged in");
-
         }
         else {
             setErrorMessage("Username or password is incorrect");

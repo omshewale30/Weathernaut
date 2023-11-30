@@ -5,12 +5,14 @@ import {useNavigate} from "react-router-dom";
 
 const SignUp = () => {
     const [errorMessage, setErrorMessage] = useState(null);
+
     const [formData, setFormData] = useState({
         username: '',
         password: '',
         email: '',
     });
     const navigate = useNavigate();
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -31,7 +33,11 @@ const SignUp = () => {
                 body: JSON.stringify(formData)
 
             });
-            if (!response.ok) {
+
+            if (response.status === 400) {
+                const data = await response.json();
+                setErrorMessage(data.error);
+            } else if (!response.ok) {
                 throw new Error("HTTP Error! status: " + response.status);
             }
             else {
@@ -42,7 +48,7 @@ const SignUp = () => {
             }
         }catch (error) {
             console.log(error);
-            setErrorMessage("An error occurred. Please try again later.")
+            setErrorMessage("An error occurred. Please try again.")
         }
     };
     return (

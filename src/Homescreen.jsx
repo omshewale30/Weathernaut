@@ -25,12 +25,16 @@ const Homescreen = () => {
         };
         fetchLocations();
     }, []);
+
+
+
     const handleLocationChange = (event) => {
         const selectedLocationId = parseInt(event.target.value);
         console.log(selectedLocationId);
         const location = locations.find((loc) => loc.locationid === selectedLocationId);
         setSelectedLocation(location);
         console.log(location);
+
     };
 
     const handleShowWeatherClick= () =>{
@@ -40,7 +44,7 @@ const Homescreen = () => {
 
     return (
         <div>
-            <h2>Home Screen</h2>
+            <h2> Weathernaut </h2>
             <label>
                 Select Location:
                 <select onChange={handleLocationChange}>
