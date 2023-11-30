@@ -12,7 +12,7 @@ const ProfileIcon = () => {
                 <div>
                     {/* You can use an icon library or your custom icon */}
 
-                    <img src="src/user.png" alt="Profile" />
+                    <img src="/src/user.png" alt="Profile" />
                 </div>
 
             </Link>

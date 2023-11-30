@@ -1,12 +1,12 @@
 import './App.css';
 import React, {useState} from "react";
-import Login from "./Login";
-import Homescreen from "./Homescreen";
+import Login from "./components/Login";
+import Homescreen from "./components/Homescreen";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import SignUp from "./SignUp";
-import WeatherView from "./WeatherView";
-import ProfileIcon from "./ProfileIcon";
-import ProfilePage from "./ProfilePage";
+import SignUp from "./components/SignUp";
+import WeatherView from "./components/WeatherView";
+import ProfileIcon from "./components/ProfileIcon";
+import ProfilePage from "./components/ProfilePage";
 
 const App = () => {
     const isLoggedin= JSON.parse(localStorage.getItem("isLoggedIn"));
