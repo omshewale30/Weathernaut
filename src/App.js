@@ -9,7 +9,7 @@ import ProfileIcon from "./components/ProfileIcon";
 import ProfilePage from "./components/ProfilePage";
 
 const App = () => {
-
+//this was done in styling branch
     const isLoggedin= JSON.parse(localStorage.getItem("isLoggedIn"));
     return (
         <Router>
