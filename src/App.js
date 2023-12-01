@@ -1,4 +1,4 @@
-import './App.css';
+import './stylesheets/App.css';
 import React, {useState} from "react";
 import Login from "./components/Login";
 import Homescreen from "./components/Homescreen";
@@ -19,8 +19,9 @@ const App = () => {
                     <Route path="/" element={<Login />} />
                     <Route path="/Homescreen" element={<Homescreen />} />
                     <Route path="/SignUp" element={<SignUp />} />
-                    <Route path="/WeatherView" element={<WeatherView />} />
+                    <Route path="/WeatherView/:locationId" element={<WeatherView />} />
                     {isLoggedin && <Route path="/ProfilePage" element={<ProfilePage />} />}
+
 
                     {/* Add other routes as needed */}
                 </Routes>

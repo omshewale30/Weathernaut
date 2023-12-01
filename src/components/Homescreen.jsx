@@ -1,12 +1,16 @@
 import React, {useState, useEffect} from "react";
-import Button from "bootstrap/js/src/button";
-import WeatherView from "./WeatherView";
+
+import WelcomeComponent from "./WelcomeComponent";
+import {useNavigate} from "react-router-dom";
+import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+import '../stylesheets/Homescreen.css';
 
 
 const Homescreen = () => {
     const [locations, setLocations] = useState([]);
     const [selectedLocation, setSelectedLocation] = useState(null);
     const [showWeather, setShowWeather] = useState(false);
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -29,6 +33,7 @@ const Homescreen = () => {
 
 
     const handleLocationChange = (event) => {
+        setShowWeather(false)
         const selectedLocationId = parseInt(event.target.value);
         console.log(selectedLocationId);
         const location = locations.find((loc) => loc.locationid === selectedLocationId);
@@ -38,38 +43,43 @@ const Homescreen = () => {
     };
 
     const handleShowWeatherClick= () =>{
-        setShowWeather(true)
+        if(selectedLocation){
+            setShowWeather(true);
+            navigate('/WeatherView/'+ selectedLocation.locationid);
 
+        }
     };
-
     return (
-        <div>
-            <h2> Weathernaut </h2>
-            <label>
-                Select Location:
-                <select onChange={handleLocationChange}>
-                    <option value="">Select a location</option>
-                    {locations.map((location) => (
-                        <option key={location.locationid} value={location.locationid}>
-                            {`${location.city}, ${location.country}`}
-                        </option>
-                    ))}
-                </select>
-            </label>
-            <button onClick={handleShowWeatherClick} disabled={!selectedLocation}>
-                Show Weather
-            </button>
-
-            {selectedLocation && (
-                <div>
-                    <p>Selected Location: {`${selectedLocation.city}, ${selectedLocation.country}`}</p>
+        <div className="homescreen-container">
+            <Container className="mt-5">
+                <Row>
+                    <WelcomeComponent/>
+                </Row>
+                <div className = "homescreen-content">
+                <Row>
+                    <Col md={6} className="offset-md-3">
+                        <Form>
+                            <Form.Group controlId="locationSelect">
+                                <Form.Label>Select Location:</Form.Label>
+                                <Form.Control as="select" onChange={handleLocationChange}>
+                                    <option value="">Select a location</option>
+                                    {locations.map((location) => (
+                                        <option key={location.locationid} value={location.locationid}>
+                                            {`${location.city}, ${location.country}`}
+                                        </option>
+                                    ))}
+                                </Form.Control>
+                            </Form.Group>
+                            <Button variant="primary" onClick={handleShowWeatherClick} disabled={!selectedLocation} className="m-5">
+                                Show Weather
+                            </Button>
+                        </Form>
+                    </Col>
+                </Row>
                 </div>
-            )}
-            {showWeather && (
-                <WeatherView locationId={selectedLocation.locationid} />
-            )}
-
+            </Container>
         </div>
+
     );
 };
 export default Homescreen;

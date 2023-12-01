@@ -1,13 +1,30 @@
 import React, { useState, useEffect } from 'react';
-
-const WeatherView = ({ locationId }) => {
+import { BsCloud, BsSun, BsCloudRain, BsSunFill, BsCloudLightningRain } from 'react-icons/bs';
+import { useParams } from 'react-router-dom';
+const getWeatherIcon = (weatherCondition) => {
+    switch (weatherCondition.toLowerCase()) {
+        case 'clear':
+            return <BsSun />;
+        case 'cloudy':
+            return <BsCloud />;
+        case 'rain':
+            return <BsCloudRain />;
+        case 'sunny':
+            return <BsSunFill />;
+        case 'partly cloudy':
+            return <BsCloudLightningRain />;
+        default:
+            return null;
+    }
+};
+const WeatherView = () => {
+    const {locationId} = useParams();
     const [weatherData, setWeatherData] = useState(null);
 
     useEffect(() => {
         const fetchWeatherData = async () => {
             try {
                 // Assuming you have an API endpoint to fetch weather data based on locationId
-                console.log("making an api call with " +locationId);
                 console.log("http://localhost:3001/api/v1/weatherData/location/"+ locationId);
                 const response = await fetch('http://localhost:3001/api/v1/weatherData/location/'+ locationId);
 
@@ -30,18 +47,18 @@ const WeatherView = ({ locationId }) => {
     }, [locationId]);
 
     return (
-        <div>
+        <div className="weather-container">
             <h2>Weather Information</h2>
             {weatherData ? (
-                <div>
+                <div className= "weather-info-container">
                     {weatherData.map((data, index) => (
-                        <div key={index}>
-                            <p>Pressure: {data.pressure}</p>
-                            <p>Precipitation: {data.precipitation}</p>
-                            <p>Data ID: {data.dataid}</p>
+                        <div key={index} className="weather-info-box">
+                            <div className="weather-icon">{getWeatherIcon(data.weather_condition)}</div>
+                            <p>Pressure: {data.pressure} pa</p>
+                            <p>Precipitation: {data.precipitation} mm</p>
                             <p>Date: {data.date}</p>
-                            <p>Temperature: {data.temperature}</p>
-                            <p>Humidity: {data.humidity}</p>
+                            <p>Temperature: {data.temperature} C</p>
+                            <p>Humidity: {data.humidity} </p>
                             <p>Wind Speed: {data.windspeed}</p>
                             <p>Weather Condition: {data.weather_condition}</p>
                             <hr />

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import {useNavigate} from "react-router-dom";
-import './LoginSignUpStyling.css';
+import '../stylesheets/LoginSignUpStyling.css';
 
 
-import user_signup_icon from './Assets/person.png';
-import email_signup_icon from './Assets/email.png';
-import password_signup_icon from './Assets/password.png';
+import user_signup_icon from '../Assets/person.png';
+import email_signup_icon from '../Assets/email.png';
+import password_signup_icon from '../Assets/password.png';
 
 const SignUp = () => {
     const [errorMessage, setErrorMessage] = useState(null);
@@ -60,6 +60,7 @@ const SignUp = () => {
     };
     return (
         <div className="login-container">
+
             <div className="col-md-6 offset-md-3">
                 <h2>Sign Up</h2>
                 <form onSubmit={handleSubmit}>

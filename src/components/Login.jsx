@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import {useNavigate} from "react-router-dom";
-import './LoginSignUpStyling.css';
+import '../stylesheets/LoginSignUpStyling.css';
 
-import user_icon from './Assets/person.png';
-import password_icon from './Assets/password.png';
+import user_icon from '../Assets/person.png';
+import password_icon from '../Assets/password.png';
 
 
 const Login = () => {
