@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import {useNavigate} from "react-router-dom";
+import './LoginSignUpStyling.css';
+
+import user_icon from './Assets/person.png';
+import password_icon from './Assets/password.png';
 
 
 const Login = () => {
@@ -47,12 +51,14 @@ const Login = () => {
         }
     };
     return (
-        <div className="container mt-5">
+        <div className="login-container">
             <div className="col-md-6 offset-md-3">
                 <h2>Login</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label htmlFor="username">Username:</label>
+                        <label htmlFor="username">
+                        <img src={user_icon} alt="" className='icon'/>
+                        Username:</label>
                         <input
                             type="text"
                             className="form-control"
@@ -63,7 +69,9 @@ const Login = () => {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="password">Password:</label>
+                        <label htmlFor="password">
+                        <img src={password_icon} alt="" className='icon'/>
+                        Password:</label>
                         <input
                             type="password"
                             className="form-control"
@@ -73,7 +81,7 @@ const Login = () => {
                             onChange={handleChange}
                         />
                     </div>
-                    <button type="submit" className="btn btn-primary">
+                    <button type="submit" className="btn btn-primary" style={{ marginTop: '10px' }}>
                         Submit
                     </button>
                     {errorMessage && <p className="text-danger">{errorMessage}</p>}
