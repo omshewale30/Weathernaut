@@ -86,7 +86,7 @@ const SignUp = () => {
                 window.localStorage.setItem("username", formData.username);
                 window.localStorage.setItem("password", formData.password);
                 window.localStorage.setItem("locationid", formData.locationid);
-                navigate('/HomeScreen');
+                navigate('/WeatherView/'+ formData.locationid);
                 console.log("User logged in");
             }
         }catch (error) {

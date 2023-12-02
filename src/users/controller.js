@@ -32,9 +32,9 @@ const checkIfUserExists = async (req, res) => {
         }
 
         const queryResult = await pool.query(queries.checkIfUserExists, [username, password]);
-
         if (queryResult.rows.length > 0) {
-            res.status(200).json({ message: 'User exists' });
+            const user = queryResult.rows[0]
+            res.status(200).json(user)
         } else {
             res.status(404).json({ message: 'User not found' });
         }
