@@ -7,7 +7,7 @@ const getWeatherIcon = (weatherCondition) => {
             return <BsSun />;
         case 'cloudy':
             return <BsCloud />;
-        case 'rain':
+        case 'rainy':
             return <BsCloudRain />;
         case 'sunny':
             return <BsSunFill />;
@@ -54,13 +54,13 @@ const WeatherView = () => {
                     {weatherData.map((data, index) => (
                         <div key={index} className="weather-info-box">
                             <div className="weather-icon">{getWeatherIcon(data.weather_condition)}</div>
-                            <p>Pressure: {data.pressure} pa</p>
-                            <p>Precipitation: {data.precipitation} mm</p>
                             <p>Date: {data.date}</p>
-                            <p>Temperature: {data.temperature} C</p>
-                            <p>Humidity: {data.humidity} </p>
-                            <p>Wind Speed: {data.windspeed}</p>
                             <p>Weather Condition: {data.weather_condition}</p>
+                            <p>Temperature: {data.temperature} C</p>
+                            <p>Humidity: {data.humidity} %</p>
+                            <p>Precipitation: {data.precipitation} mm</p>
+                            <p>Wind Speed: {data.windspeed} mp/h</p>
+                            <p>Pressure: {data.pressure} pa</p>
                             <hr />
                         </div>
                     ))}

@@ -1,4 +1,4 @@
-// WelcomePage.jsx
+// WelcomeComponent.jsx
 import React, { useEffect, useState } from 'react';
 
 const WelcomeComponent = () => {
@@ -17,9 +17,19 @@ const WelcomeComponent = () => {
     }, []);
 
     return (
-        <div>
-            <h1 className="display-4 font-weight-bold">Weathernaut</h1>
-            <p>Current Date and Time: {currentDateTime}</p>
+        <div
+            style={{
+                textAlign: 'center',
+                margin: '20px',
+                padding: '20px',
+                color: '#FFFFFF',
+                backgroundColor: 'rgba(242, 242, 242, 0.2)', // Slightly transparent light gray background color
+                borderRadius: '10px',
+                fontFamily: 'Courier New, monospace',
+            }}
+        >
+            <h1 style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '10px' }}>Weathernaut</h1>
+            <p style={{ fontSize: '1.5rem' }}>Current Date and Time: {currentDateTime}</p>
         </div>
     );
 };
