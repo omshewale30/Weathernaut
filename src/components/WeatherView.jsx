@@ -30,12 +30,13 @@ const WeatherView = ({ locationId }) => {
     }, [locationId]);
 
     return (
-        <div>
+        <div className='background'>
+        <div className='weatherview-Container'>
             <h2>Weather Information</h2>
             {weatherData ? (
                 <div>
                     {weatherData.map((data, index) => (
-                        <div key={index}>
+                        <div className='form-Container' key={index}>
                             <p>Pressure: {data.pressure}</p>
                             <p>Precipitation: {data.precipitation}</p>
                             <p>Data ID: {data.dataid}</p>
@@ -44,13 +45,13 @@ const WeatherView = ({ locationId }) => {
                             <p>Humidity: {data.humidity}</p>
                             <p>Wind Speed: {data.windspeed}</p>
                             <p>Weather Condition: {data.weather_condition}</p>
-                            <hr />
                         </div>
                     ))}
                 </div>
             ) : (
                 <p>Loading weather data...</p>
             )}
+        </div>
         </div>
 
     );

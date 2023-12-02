@@ -43,8 +43,10 @@ const Homescreen = () => {
     };
 
     return (
-        <div>
+        <div className = "background">
+        <div className="homescreen-Container">
             <h2> Weathernaut </h2>
+            <div className="form-container">
             <label>
                 Select Location:
                 <select onChange={handleLocationChange}>
@@ -56,7 +58,7 @@ const Homescreen = () => {
                     ))}
                 </select>
             </label>
-            <button onClick={handleShowWeatherClick} disabled={!selectedLocation}>
+            <button onClick={handleShowWeatherClick} disabled={!selectedLocation} style={{marginTop:'20px'}} >
                 Show Weather
             </button>
 
@@ -68,7 +70,8 @@ const Homescreen = () => {
             {showWeather && (
                 <WeatherView locationId={selectedLocation.locationid} />
             )}
-
+            </div>
+        </div>
         </div>
     );
 };
