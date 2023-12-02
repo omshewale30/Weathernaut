@@ -5,7 +5,7 @@ const pool = new Pool({
         host: 'localhost',
         user:'postgres',
         port: 5432,
-        password: '123456789',
+        password: '3001',
         database: 'postgres'
 });
 //testing merge conflict

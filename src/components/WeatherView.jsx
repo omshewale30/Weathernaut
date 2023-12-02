@@ -7,7 +7,7 @@ const getWeatherIcon = (weatherCondition) => {
             return <BsSun />;
         case 'cloudy':
             return <BsCloud />;
-        case 'rainy':
+        case 'rain':
             return <BsCloudRain />;
         case 'sunny':
             return <BsSunFill />;

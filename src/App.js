@@ -8,6 +8,9 @@ import WeatherView from "./components/WeatherView";
 import ProfileIcon from "./components/ProfileIcon";
 import ProfilePage from "./components/ProfilePage";
 
+
+//TODO: Add delete, update functionality to the profile page
+
 const App = () => {
 
     const isLoggedin= JSON.parse(localStorage.getItem("isLoggedIn"));
