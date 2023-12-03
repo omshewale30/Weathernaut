@@ -10,6 +10,7 @@ const Homescreen = () => {
     const [locations, setLocations] = useState([]);
     const [selectedLocation, setSelectedLocation] = useState(null);
     const [showWeather, setShowWeather] = useState(false);
+    
     const navigate = useNavigate();
 
 
@@ -33,20 +34,20 @@ const Homescreen = () => {
 
 
     const handleLocationChange = (event) => {
-        setShowWeather(false)
+        setShowWeather(true)
         const selectedLocationId = parseInt(event.target.value);
         console.log(selectedLocationId);
         const location = locations.find((loc) => loc.locationid === selectedLocationId);
-        setSelectedLocation(location);
+        setSelectedLocation(selectedLocationId);
         console.log(location);
 
     };
 
     const handleShowWeatherClick= () =>{
-        if(selectedLocation){
-            setShowWeather(true);
-            navigate('/WeatherView/'+ selectedLocation.locationid);
-
+        
+        if(selectedLocation!=null){
+            setShowWeather(false);
+            navigate('/WeatherView/'+ selectedLocation);
         }
     };
     return (
@@ -70,7 +71,7 @@ const Homescreen = () => {
                                     ))}
                                 </Form.Control>
                             </Form.Group>
-                            <Button variant="primary" onClick={handleShowWeatherClick} disabled={!selectedLocation} className="m-5">
+                            <Button variant="primary" onClick={handleShowWeatherClick} disabled={!showWeather} className="m-5">
                                 Show Weather
                             </Button>
                         </Form>
