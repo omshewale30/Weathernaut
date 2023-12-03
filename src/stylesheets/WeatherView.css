@@ -1,0 +1,27 @@
+  .weather-background {
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+    background-image: url('../Assets/background_weatherView.jpg');
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .weather-container{
+    color:#fff;
+    text-align: center;
+    background-color: rgba(242, 242, 242, 0.2);
+    padding:20px;
+    border-radius: 10px;
+    font-family: 'Courier New', monospace;
+  }
+
+  .weather-info-container {
+    border: 2px solid #000; /* Border color and width */
+    padding: 20px; /* Add padding for spacing inside the container */
+    margin: 0 auto; /* Center the container horizontally */
+    max-width: 400px; /* Set a maximum width for the container if needed */
+    min-height: 125px;
+    text-align: center; /* Center the text within the container */
+  }

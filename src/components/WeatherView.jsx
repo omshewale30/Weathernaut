@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BsCloud, BsSun, BsCloudRain, BsSunFill, BsCloudLightningRain } from 'react-icons/bs';
 import { useParams } from 'react-router-dom';
 import {Button} from "react-bootstrap";
+import '../stylesheets/WeatherView.css';
 const getWeatherIcon = (weatherCondition) => {
     switch (weatherCondition.toLowerCase()) {
         case 'clear':
@@ -48,8 +49,9 @@ const WeatherView = () => {
     }, [locationId]);
 
     return (
+        <div className='weather-background'>
         <div className="weather-container">
-            <h2>Weather Information</h2>
+            <h1><b>Weather Information</b></h1>
             {weatherData ? (
                 <div className= "weather-info-container">
                     {weatherData.map((data, index) => (
@@ -70,6 +72,7 @@ const WeatherView = () => {
                 <p>Loading weather data...</p>
             )}
             <Button href="/HomeScreen" variant="primary">Change location</Button>
+        </div>
         </div>
 
     );
