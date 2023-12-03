@@ -20,31 +20,6 @@ body, html {
     align-items: center;
   }
 
-  .background {
-    height: 100vh;
-    width: 100%;
-    background-size: cover;
-    background-image: url('./Assets/WeatherAppBackgroundScreen.jpg');
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+ 
+
   
-  .homescreen-Container {
-    text-align: center;
-    max-width: 400px; /* Adjust the maximum width as needed */
-    padding: 20px;
-  }
-
-  .weatherview-Container{
-    text-align: center;
-  }
-
-  .form-container {
-    border: 2px solid #000; /* Border color and width */
-    padding: 20px; /* Add padding for spacing inside the container */
-    margin: 0 auto; /* Center the container horizontally */
-    max-width: 400px; /* Set a maximum width for the container if needed */
-    min-height: 125px;
-    text-align: center; /* Center the text within the container */
-  }
