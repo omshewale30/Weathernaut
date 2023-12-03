@@ -32,9 +32,9 @@ const checkIfUserExists = async (req, res) => {
         }
 
         const queryResult = await pool.query(queries.checkIfUserExists, [username, password]);
-
         if (queryResult.rows.length > 0) {
-            res.status(200).json({ message: 'User exists' });
+            const user = queryResult.rows[0]
+            res.status(200).json(user)
         } else {
             res.status(404).json({ message: 'User not found' });
         }
@@ -47,9 +47,10 @@ const checkIfUserExists = async (req, res) => {
 const createUser = async (req, res) => {
     try {
         console.log(req.body);
-        const { username, email, password } = req.body;
+        const { username, email, password, locationid } = req.body;
+        const intlocationid = parseInt(locationid);
 
-        console.log("Username: " + username + "email: " + email + "Password: " + password);
+        console.log("Username: " + username + "email: " + email + "Password: " + password  + "LocationID: " + locationid);
 
         // Check if any of the fields are empty
         if (!username || !email || !password) {
@@ -62,7 +63,7 @@ const createUser = async (req, res) => {
             return res.status(400).json({ error: 'Email already exists' });
         }
 
-        const createUserResult = await pool.query(queries.createUser, [username, email, password]);
+        const createUserResult = await pool.query(queries.createUser, [username, email, password, intlocationid]);
 
         res.status(201).json({ message: 'User added' });
     } catch (error) {

@@ -1,4 +1,4 @@
-import './App.css';
+import './stylesheets/App.css';
 import React, {useState} from "react";
 import Login from "./components/Login";
 import Homescreen from "./components/Homescreen";
@@ -7,6 +7,9 @@ import SignUp from "./components/SignUp";
 import WeatherView from "./components/WeatherView";
 import ProfileIcon from "./components/ProfileIcon";
 import ProfilePage from "./components/ProfilePage";
+
+
+//TODO: Add delete, update functionality to the profile page
 
 const App = () => {
 
@@ -19,8 +22,9 @@ const App = () => {
                     <Route path="/" element={<Login />} />
                     <Route path="/Homescreen" element={<Homescreen />} />
                     <Route path="/SignUp" element={<SignUp />} />
-                    <Route path="/WeatherView" element={<WeatherView />} />
+                    <Route path="/WeatherView/:locationId" element={<WeatherView />} />
                     {isLoggedin && <Route path="/ProfilePage" element={<ProfilePage />} />}
+
 
                     {/* Add other routes as needed */}
                 </Routes>

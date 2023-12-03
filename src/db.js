@@ -8,5 +8,5 @@ const pool = new Pool({
         password: '3001',
         database: 'postgres'
 });
-
+//testing merge conflict
 module.exports = pool;

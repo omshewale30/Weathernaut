@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import {useNavigate} from "react-router-dom";
-import './LoginSignUpStyling.css';
+import '../stylesheets/LoginSignUpStyling.css';
 
-import user_icon from './Assets/person.png';
-import password_icon from './Assets/password.png';
+import user_icon from '../Assets/person.png';
+import password_icon from '../Assets/password.png';
 
 
 const Login = () => {
+
     const [errorMessage, setErrorMessage] = useState(null);
     const [formData, setFormData] = useState({
         username: '',
@@ -33,7 +34,8 @@ const Login = () => {
         }
 
         const response = await fetch("http://localhost:3001/api/v1/users/checkIfUserExists/" + formData.username + "/" + formData.password);
-
+        console.log(response);
+        const user= await response.json();
         if (response.status === 400) {
             const data= await response.json();
             setErrorMessage(data.error)
@@ -43,7 +45,7 @@ const Login = () => {
 
             window.localStorage.setItem("username", formData.username);
             window.localStorage.setItem("password", formData.password);
-            navigate('/HomeScreen');
+            navigate('/WeatherView/'+user.locationid);
             console.log("User logged in");
         }
         else {
