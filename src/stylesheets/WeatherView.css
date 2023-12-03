@@ -1,0 +1,28 @@
+/* WeatherView.css */
+
+.weather-container {
+    height: 100vh; /* Set the height to cover the entire viewport */
+    background-size: cover;
+    background-position: center;
+
+    /* Add any common styling for the weather container */
+}
+
+.clear {
+    background-image: url('https://www.icegif.com/wp-content/uploads/2022/08/icegif-959.gif');
+}
+
+.cloudy {
+    background-image: url('../Assets/weather.gif');
+}
+.rainy {
+    background-image: url('https://i.pinimg.com/originals/c1/a9/3a/c1a93a1d0de0059a3119b8b1a55ce582.gif');
+}
+.sunny {
+    background-image: url('https://64.media.tumblr.com/c4205bb1f4230f38c8e79b49055a9c67/9c91834557006983-da/s640x960/f857fd00832f43235d66caf44d1563106f0aa099.gif');
+}
+
+.partly_cloudy{
+    background-image: url("https://cdnb.artstation.com/p/assets/images/images/023/743/143/original/valentin-hume-rainymoodresized.gif?1580214826");
+}
+/* Add similar styles for other weather conditions */

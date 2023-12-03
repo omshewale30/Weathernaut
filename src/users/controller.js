@@ -95,36 +95,36 @@ const createUser = async (req, res) => {
 // };
 
 const deleteUser = async (req, res) => {
-    const userid = parseInt(req.params.userid);
+    const username = (req.params.username);
 
-    pool.query(queries.getUserById, [userid], (error, results) => {
+    pool.query(queries.getUserByUserName, [username], (error, results) => {
         if (!results.rows.length) {
             res.send('User does not exist');
         }
 
-        pool.query(queries.deleteUser, [userid], (error, results) => {
+        pool.query(queries.deleteUser, [username], (error, results) => {
             if (error) {
                 throw error;
             }
-            res.status(200).send(`User deleted with ID: ${userid}`);
+            res.status(200).send(`User deleted with UserName ${username}`);
         });
     });
 }
 
 const updateUser = async (req, res) => {
-    const userid = parseInt(req.params.userid);
-    const {username, email, password} = req.body[0];
+    const { username } = req.params;
+    const { locationid } = req.body;
 
-    pool.query(queries.getUserById, [userid], (error, results) => {
+    pool.query(queries.getUserByUserName, [username], (error, results) => {
         if (!results.rows.length) {
             res.send('User does not exist');
         }
 
-        pool.query(queries.updateUser, [username, email, password, userid], (error, results) => {
+        pool.query(queries.updateUser, [username, locationid], (error, results) => {
             if (error) {
                 throw error;
             }
-            res.status(200).send(`User modified with ID: ${userid}`);
+            res.status(200).send(`User modified with userName: ${username}`);
         });
     });
 

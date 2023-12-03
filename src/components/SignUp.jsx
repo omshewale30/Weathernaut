@@ -6,6 +6,7 @@ import '../stylesheets/LoginSignUpStyling.css';
 import user_signup_icon from '../Assets/person.png';
 import email_signup_icon from '../Assets/email.png';
 import password_signup_icon from '../Assets/password.png';
+import globe_signup_icon from '../Assets/location.png';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 
 const SignUp = () => {
@@ -141,6 +142,7 @@ const SignUp = () => {
                     </div>
                     <Form>
                         <Form.Group controlId="locationSelect">
+
                             <Form.Label>Select Location:</Form.Label>
                             <Form.Control as="select" onChange={handleLocationChange}>
                                 <option value="">Select a location</option>

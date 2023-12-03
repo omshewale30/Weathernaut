@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { BsCloud, BsSun, BsCloudRain, BsSunFill, BsCloudLightningRain } from 'react-icons/bs';
 import { useParams } from 'react-router-dom';
 import {Button} from "react-bootstrap";
+import '../stylesheets/WeatherView.css';
 const getWeatherIcon = (weatherCondition) => {
     switch (weatherCondition.toLowerCase()) {
         case 'clear':
             return <BsSun />;
         case 'cloudy':
             return <BsCloud />;
-        case 'rain':
+        case 'rainy':
             return <BsCloudRain />;
         case 'sunny':
             return <BsSunFill />;
@@ -47,8 +48,25 @@ const WeatherView = () => {
         }
     }, [locationId]);
 
+    const getBackgroundImage = (weatherCondition) => {
+        switch (weatherCondition.toLowerCase()) {
+            case 'clear':
+                return 'url(${process.env.PUBLIC_URL}/Assets/clear_sky.gif)';
+            case 'cloudy':
+                return 'url(${process.env.PUBLIC_URL}/Assets/weather.gif)';
+            case 'rainy':
+                return 'url(${process.env.PUBLIC_URL}/Assets/rainy.gif)';
+            case 'sunny':
+                return 'url(${process.env.PUBLIC_URL}/Assets/sunny.gif)';
+            case 'partly cloudy':
+                return 'url(${process.env.PUBLIC_URL}/Assets/partly_cloudy.gif)';
+            default:
+                return '';
+        }
+    };
+
     return (
-        <div className="weather-container">
+        <div className={`weather-container ${weatherData ? weatherData[0].weather_condition.toLowerCase() : ''}`}>
             <h2>Weather Information</h2>
             {weatherData ? (
                 <div className= "weather-info-container">

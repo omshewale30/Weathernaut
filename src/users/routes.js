@@ -9,8 +9,8 @@ router.get('/:userid', controller.getUserById); //gets the user by id from the d
 router.get('/checkIfUserExists/:username/:password', controller.checkIfUserExists);
 
 router.post('/', controller.createUser);
-router.delete('/:userid', controller.deleteUser);
+router.delete('/:username', controller.deleteUser);
 
 
-router.put('/:userid', controller.updateUser);
+router.put('/:username', controller.updateUser);
 module.exports = router;
