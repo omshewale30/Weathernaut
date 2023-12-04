@@ -22,7 +22,7 @@ const App = () => {
                     <Route path="/" element={<Login />} />
                     <Route path="/Homescreen" element={<Homescreen />} />
                     <Route path="/SignUp" element={<SignUp />} />
-                    <Route path="/WeatherView/:locationId" element={<WeatherView />} />
+                    <Route path="/WeatherView/:locationId/:city/:country" element={<WeatherView />} />
                     {isLoggedin && <Route path="/ProfilePage" element={<ProfilePage />} />}
 
 

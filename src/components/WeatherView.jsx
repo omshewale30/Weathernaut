@@ -20,8 +20,9 @@ const getWeatherIcon = (weatherCondition) => {
     }
 };
 const WeatherView = () => {
-    const {locationId} = useParams();
+    const {locationId,city,country} = useParams();
     const [weatherData, setWeatherData] = useState(null);
+    console.log(city)
 
     useEffect(() => {
         const fetchWeatherData = async () => {
@@ -48,26 +49,11 @@ const WeatherView = () => {
         }
     }, [locationId]);
 
-    const getBackgroundImage = (weatherCondition) => {
-        switch (weatherCondition.toLowerCase()) {
-            case 'clear':
-                return 'url(${process.env.PUBLIC_URL}/Assets/clear_sky.gif)';
-            case 'cloudy':
-                return 'url(${process.env.PUBLIC_URL}/Assets/weather.gif)';
-            case 'rainy':
-                return 'url(${process.env.PUBLIC_URL}/Assets/rainy.gif)';
-            case 'sunny':
-                return 'url(${process.env.PUBLIC_URL}/Assets/sunny.gif)';
-            case 'partly cloudy':
-                return 'url(${process.env.PUBLIC_URL}/Assets/partly_cloudy.gif)';
-            default:
-                return '';
-        }
-    };
+
 
     return (
         <div className={`weather-container ${weatherData ? weatherData[0].weather_condition.toLowerCase() : ''}`}>
-            <h2>Weather Information</h2>
+            <h2>Weather Information for {city},{country} </h2>
             {weatherData ? (
                 <div className= "weather-info-container">
                     {weatherData.map((data, index) => (

@@ -45,7 +45,7 @@ const Homescreen = () => {
     const handleShowWeatherClick= () =>{
         if(selectedLocation){
             setShowWeather(true);
-            navigate('/WeatherView/'+ selectedLocation.locationid);
+            navigate('/WeatherView/'+ selectedLocation.locationid+'/'+selectedLocation.city+'/'+selectedLocation.country);
 
         }
     };
